@@ -1,2 +1,2 @@
 # miniCoreIngWeb
-Mini Core - Ingeniería Web - Porcentaje de Productividad
+Core - Ingeniería Web - Porcentaje de Productividad
