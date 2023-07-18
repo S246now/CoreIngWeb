@@ -10,8 +10,10 @@ function MainHeader() {
             <nav className={classes.navigation}>
                 <ul>
                     <li>
-                        <Link href='/tasks' >Tasks</Link>
+                       {/*  <Link href='/tasks' >Tasks</Link>
+                        <br/>
                         <Link href='/' >Profile</Link>
+                        <br/> */}
                         <Link href='/' >Register</Link>
                     </li>
                 </ul>
