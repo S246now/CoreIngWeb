@@ -1,31 +1,22 @@
-//defines how the item task is gonna be shown
-//defining the jsx extractor
+import classes from "./taskItem.module.css";
 import Link from "next/link";
 
 
 function TaskItem(props) {
     //extract data
-    const {id, type, tiempoFinalizacion, nivelProductivo} = props
+    const { id, nombre, tiempo, productividad } = props
     //give format to the data as needed
     const taskDetail = `/tasks/${id}`;
 
-    return(
-        <li>
-            <img src="" alt=""/>
-            <div>
-                <div>
-                    <h2>TITLE TASK</h2>
-                    <div>
-                        {}
-                    </div>
-                    <div>
-                        {type}
-                    </div>
-                </div>
-                <div>
-                    <Link href={taskDetail}>Explore Task</Link>
-                </div>
-            </div>
+    return (
+        <li className={classes.li}>
+            <h3>Tipo de Tarea: {nombre}</h3>
+            <br />
+            <p>Tiempo de Finalización: {tiempo} minutos</p>
+            <br />
+            <p>Nivel de Productividad: {productividad} %</p>
+            <br />
+            <Link href={taskDetail}>Explore Task</Link>
         </li>
     )
 }

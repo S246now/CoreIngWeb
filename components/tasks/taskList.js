@@ -2,18 +2,17 @@ import TaskItem from "./taskItem";
 
 function TaskList(props) {
 
-    const { items } = props;
+    const { tasks } = props;
 
     return (
         <ul>
-            {/* A component that defines the jsx codefor the list */}
-            {/* and pass some data  */}
-            {items.map(task =>
-                <TaskItem /* sending data to TaskItem for format */
-                    key={task.id}/* react expect this when we output a list dynamicly */
-                    id={task.id}
-                    type={task.type}
-                    method={task.method}
+            {tasks.map(task =>
+                <TaskItem /* sending data to TaskItem for validation and format */
+                    key={task._id}/* react expect this when we output a list dynamicly */
+                    id={task._id}
+                    nombre={task.taskName}
+                    tiempo={task.taskTime}
+                    productividad={task.productivity}
                 />
             )}
         </ul>
@@ -21,4 +20,4 @@ function TaskList(props) {
     )
 }
 
-export default TaskList;
+export default TaskList; 

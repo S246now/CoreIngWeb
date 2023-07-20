@@ -2,8 +2,37 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import NewTask from '../components/tasks/newTask'
+import { useState } from 'react'
+import TableTask from '../components/tasks/tableTask'
+import TableSongs from '../components/songs/tableSong'
+import Button from '../components/ui/button'
+
 
 export default function Home() {
+  const [tasksItems, setTasksItems] = useState([]);
+  const [songsItems, setSongsItems] = useState([]);
+  const [showTaskTable, setShowTaskTable] = useState(false);
+  const [showSongTable, setShowSongTable] = useState(false);
+
+  function showTasks() {
+    setShowTaskTable(!showTaskTable);
+    fetch('/api/tasks')
+      .then((response) => response.json())
+      .then((data) => {
+        setTasksItems(data.tasks)
+      });
+    //console.log(tasksItems);
+  }
+  function showSongs() {
+    setShowSongTable(!showSongTable);
+    fetch('/api/songs')
+      .then((response) => response.json())
+      .then((data) => {
+        setSongsItems(data.songs)
+      });
+    //console.log(songsItems);
+  }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -14,22 +43,37 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          HOME NO AUTENTIFICADO
+          Calcula tu Productividad
         </h1>
 
         <div className={styles.grid}>
           <p>
-            Layout con: Home, Perfil y Registrarse 
-            <br/>
+            Ingresa ahora y descubre tus momentos más productivos!
           </p>
-          
-          <p>
-            BPM más usado con la tarea más realizada
-            <br/>
-             Y Mejor nivel de productividad
-          </p>
-          <NewTask/>
         </div>
+
+        <br />
+        {/* Ingresa nueva Tarea */}
+        {/* <div className={styles.card}>
+          <NewTask />
+        </div> */}
+
+        <div>
+          <Button link={'/tasks'}>Ver Tareas</Button>
+        </div>
+        {/* Mostrar Tareas */}
+        {/* <button onClick={showTasks}>Ver Tareas</button>
+        {showTaskTable && <TableTask tasks={tasksItems} />} */}
+
+        <br />
+
+        <div>
+        <Button link={'/songs'}>Ver Canciones</Button>
+        </div>
+        {/* Mostrar Canciones */}
+        {/* <button onClick={showSongs}>Ver Canciones</button>
+        {showSongTable && <TableSongs songs={songsItems} />} */}
+
       </main>
 
       <footer className={styles.footer}>

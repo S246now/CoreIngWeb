@@ -1,14 +1,26 @@
-import TaskList from "../../components/taskList";
+import TaskList from "../../components/tasks/taskList";
+import TableTask from "../../components/tasks/tableTask";
+import { useEffect, useState } from "react";
 
 function TaskPage() {
-    //save the tasks
-    const tasks = getAllTasks();
-    return(
+    const [tasks, setTasks] = useState([]);
+
+    useEffect(() => {
+        fetch('/api/tasks')
+            .then((response) => response.json())
+            .then((data) => {
+                if (data && data.tasks) {
+                    setTasks(data.tasks);
+                }
+            })
+            .catch((error) => console.error('Error fetching data:', error));
+    }, []);
+
+    return (
         <div>
-            <h1>Main page of Tasks</h1>
-            <h2>Here is a list of task</h2>
-            <br/>
-            <TaskList items={tasks}/>{/* passing data */}
+            <br />
+            {/* show Table */}
+            <TaskList tasks={tasks} />
         </div>
     )
 }
