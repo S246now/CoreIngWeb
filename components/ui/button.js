@@ -1,4 +1,4 @@
-/* import Link from 'next/link'; */
+//Factory Design Pattern
 import classes from './button.module.css'; 
 import React from "react";
 
@@ -21,13 +21,13 @@ export class LinkButton extends Button {
   }
 }
 
-//Subclase para mostrar lista
+//Subclase para mostrar tabla
 export class ShowListButton extends Button {
   render() {
     const { text, toggleShowList, fetchData } = this.props;
     const handleClick = () => {
-      toggleShowList(); // Cambia el estado showList
-      fetchData(); // Realiza el fetch
+      toggleShowList(); //Cambia el estado de showList
+      fetchData(); //Realiza el fetch
     };
 
     return (
@@ -38,22 +38,4 @@ export class ShowListButton extends Button {
   }
 }
 
-
-/* function Button(props) {
-  if (props.link) {
-    return (
-      <Link href={props.link} className={classes.btn}>
-        {props.children}
-      </Link>
-    );
-  }
-
-  return (
-    <button className={classes.btn} onClick={props.onClick}>
-      {props.children}
-    </button>
-  );
-}
-
-export default Button; */
 

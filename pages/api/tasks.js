@@ -18,7 +18,7 @@ async function Handler(req, res) {
     const data = await collection.find().toArray();
     //res.status(200).json({ sales: data });
 
-    // Obtein TypeTask for each Task
+    //Obtein TypeTask for each Task
     const showInfoTasks = await Promise.all(
       data.map(async (task) => {
         const typeTaskCollection = db.collection('typeTask');

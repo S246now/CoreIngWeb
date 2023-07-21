@@ -7,6 +7,7 @@ import TableTask from '../components/tasks/tableTask'
 import TableSongs from '../components/songs/tableSong'
 import React from "react";
 import { LinkButton, ShowListButton } from "../components/ui/button";
+import { Component, TableDecorator } from "../components/table";
 
 
 export default function Home() {
@@ -37,12 +38,12 @@ export default function Home() {
     //console.log(songsItems);
   }
 
-
   const [showList, setShowList] = useState(false);
   const toggleShowList = () => {
     setShowList(!showList);
   };
 
+  
   return (
     <div className={styles.container}>
       <Head>
@@ -79,7 +80,7 @@ export default function Home() {
           toggleShowList={toggleShowList}
           fetchData={showTasks}
         />
-        {showList && <TableTask tasks={tasksItems} />}
+        {showTaskTable && <TableTask tasks={tasksItems} /> }
         <br />
         <LinkButton text="Más Detalles ->" link={TasksPage} />
 
@@ -92,10 +93,11 @@ export default function Home() {
         <ShowListButton
           text="Ver Canciones Ingresadas"
           toggleShowList={toggleShowList}
-          fetchData={showTasks}
+          fetchData={showSongs}
         />
-        {showList && <TableTask tasks={tasksItems} />}
-
+        {showSongTable && <TableSongs songs={songsItems} />}
+        <br />
+        <LinkButton text="Más Detalles ->" link={SongsPage} />
       </main>
 
       <footer className={styles.footer}>
