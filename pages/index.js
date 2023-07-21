@@ -5,7 +5,8 @@ import NewTask from '../components/tasks/newTask'
 import { useState } from 'react'
 import TableTask from '../components/tasks/tableTask'
 import TableSongs from '../components/songs/tableSong'
-import Button from '../components/ui/button'
+import React from "react";
+import { LinkButton, ShowListButton } from "../components/ui/button";
 
 
 export default function Home() {
@@ -13,6 +14,8 @@ export default function Home() {
   const [songsItems, setSongsItems] = useState([]);
   const [showTaskTable, setShowTaskTable] = useState(false);
   const [showSongTable, setShowSongTable] = useState(false);
+  const TasksPage = '/tasks';
+  const SongsPage = '/songs';
 
   function showTasks() {
     setShowTaskTable(!showTaskTable);
@@ -23,6 +26,7 @@ export default function Home() {
       });
     //console.log(tasksItems);
   }
+
   function showSongs() {
     setShowSongTable(!showSongTable);
     fetch('/api/songs')
@@ -32,6 +36,12 @@ export default function Home() {
       });
     //console.log(songsItems);
   }
+
+
+  const [showList, setShowList] = useState(false);
+  const toggleShowList = () => {
+    setShowList(!showList);
+  };
 
   return (
     <div className={styles.container}>
@@ -58,32 +68,40 @@ export default function Home() {
           <NewTask />
         </div> */}
 
-        <div>
-          <Button link={'/tasks'}>Ver Tareas</Button>
-        </div>
-        {/* Mostrar Tareas */}
+        {/* ----- Mostrar Tareas ----- */}
         {/* <button onClick={showTasks}>Ver Tareas</button>
         {showTaskTable && <TableTask tasks={tasksItems} />} */}
-
+        
+        {/* mostrar u ocultar tabla de tareas */}
         <br />
+        <ShowListButton
+          text="Ver Tareas Ingresadas"
+          toggleShowList={toggleShowList}
+          fetchData={showTasks}
+        />
+        {showList && <TableTask tasks={tasksItems} />}
+        <br />
+        <LinkButton text="Más Detalles ->" link={TasksPage} />
 
-        <div>
-        <Button link={'/songs'}>Ver Canciones</Button>
-        </div>
-        {/* Mostrar Canciones */}
+        {/* ----- Mostrar Canciones ----- */}
+        <br />
+        <br />
+        <br />
         {/* <button onClick={showSongs}>Ver Canciones</button>
         {showSongTable && <TableSongs songs={songsItems} />} */}
+        <ShowListButton
+          text="Ver Canciones Ingresadas"
+          toggleShowList={toggleShowList}
+          fetchData={showTasks}
+        />
+        {showList && <TableTask tasks={tasksItems} />}
 
       </main>
 
       <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <p>
           Core - Ingeniería Web
-        </a>
+        </p>
       </footer>
     </div>
   )
